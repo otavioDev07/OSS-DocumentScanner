@@ -1312,7 +1312,15 @@
                         const defaultValue = typeof item.rightValue === 'function' ? item.rightValue() : typeof item.default === 'function' ? item.default() : item.default;
                         const result = await prompt({
                             title: getTitle(item),
-                            message: item.useHTML ? item.description : item.full_description || item.description,
+                            messageView: createView(Label, {
+                                padding: '0 20 0 20',
+                                autoFontSize: true,
+                                textWrap: true,
+                                lineBreak: 'end',
+                                maxLines: 3,
+                                color: colorOnSurfaceVariant as any,
+                                text: item.useHTML ? item.description : item.full_description || item.description
+                            }),
                             okButtonText: l('save'),
                             cancelButtonText: l('cancel'),
                             autoFocus: true,
