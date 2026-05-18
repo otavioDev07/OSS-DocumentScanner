@@ -3,6 +3,7 @@ import { installMixins as installUIMixins } from '@nativescript-community/system
 import { overrideSpanAndFormattedString } from '@nativescript-community/text';
 import SwipeMenuElement from '@nativescript-community/ui-collectionview-swipemenu/svelte';
 import CollectionViewElement from '@nativescript-community/ui-collectionview/svelte';
+import SegmentedBarElement from '@nativescript-community/ui-material-segmentedbar/svelte/SegmentedBarElement';
 import DrawerElement from '@nativescript-community/ui-drawer/svelte';
 import { ImagePipeline, ImageViewTraceCategory, getImagePipeline, initialize } from '@nativescript-community/ui-image';
 import { installMixins as installColorFilters } from '@nativescript-community/ui-image-colorfilter';
@@ -74,8 +75,7 @@ try {
     registerNativeViewElement('AbsoluteLayout', () => require('@nativescript/core').AbsoluteLayout);
     registerNativeViewElement('wraplayout', () => require('@nativescript/core').WrapLayout);
     registerNativeViewElement('flexlayout', () => require('@nativescript/core').FlexboxLayout);
-    registerNativeViewElement('SegmentedBar', () => require('plugin-shared/SegmentedBar').SegmentedBar);
-    registerNativeViewElement('SegmentedBarItem', () => require('plugin-shared/SegmentedBar').SegmentedBarItem);
+    // registerNativeViewElement('ShaderView', () => require('plugin-shared/ShaderView').ShaderView);
     registerElement('Frame', () => new FrameElement());
     registerElement('Page', () => new PageElement());
     registerNativeViewElement('GridLayout', () => require('@nativescript/core').GridLayout);
@@ -109,6 +109,7 @@ try {
 
     PagerElement.register();
     CollectionViewElement.register();
+    SegmentedBarElement.register();
     SwipeMenuElement.register();
     DrawerElement.register();
     const shouldEnableSentry = ApplicationSettings.getBoolean(SETTINGS_ENABLE_CRASH_REPORT, PLAY_STORE_BUILD);
