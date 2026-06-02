@@ -8,6 +8,7 @@
     import CActionBar from '~/components/common/CActionBar.svelte';
     import OCRSettingsBottomSheet from '~/components/ocr/OCRSettingsBottomSheet.svelte';
     import PDFSyncSettingsView from '~/components/settings/sync/PDFSyncSettingsView.svelte';
+    import SyncFoldersSettingsView from '~/components/settings/sync/SyncFoldersSettingsView.svelte';
     import SyncSettingsCollectionView from '~/components/settings/sync/SyncSettingsCollectionView.svelte';
     import { lc } from '~/helpers/locale';
     import { getPDFDefaultExportOptions } from '~/services/pdf/PDFCanvas';
@@ -132,6 +133,9 @@
             value: $store.useFoldersStructure
         },
         {
+            type: 'syncfolders'
+        },
+        {
             type: 'sectionheader',
             title: lc('pdf_settings')
         },
@@ -167,6 +171,9 @@
 
             <Template key="ocroptions">
                 <OCRSettingsBottomSheet onlySettings={true} bind:dataType={$store.OCRDataType} bind:languages={$store.OCRLanguages} />
+            </Template>
+            <Template key="syncfolders">
+                <SyncFoldersSettingsView {store} />
             </Template>
         </SyncSettingsCollectionView>
 

@@ -9,6 +9,7 @@ export interface BaseSyncServiceOptions {
     autoSync?: boolean;
     enabled?: boolean;
     color?: string | Color;
+    syncFolders?: number[];
 }
 
 export function getStoredSyncServices() {
@@ -23,6 +24,7 @@ export abstract class BaseSyncService extends Observable {
     autoSync = false;
     enabled = true;
     color?: string | Color;
+    syncFolders?: number[];
     static getEnabledServices() {
         return Object.values(singletons);
     }

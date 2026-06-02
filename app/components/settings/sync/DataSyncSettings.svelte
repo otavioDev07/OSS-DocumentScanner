@@ -1,9 +1,11 @@
 <script context="module" lang="ts">
     import { NativeViewElementNode } from '@nativescript-community/svelte-native/dom';
+    import { Template } from '@nativescript-community/svelte-native/components';
     import { Color, ObservableArray, Page } from '@nativescript/core';
     import { closeModal } from '@shared/utils/svelte/ui';
     import { get, writable } from 'svelte/store';
     import CActionBar from '~/components/common/CActionBar.svelte';
+    import SyncFoldersSettingsView from '~/components/settings/sync/SyncFoldersSettingsView.svelte';
     import SyncSettingsCollectionView from '~/components/settings/sync/SyncSettingsCollectionView.svelte';
     import { lc } from '~/helpers/locale';
     import { BasePDFSyncServiceOptions } from '~/services/sync/BasePDFSyncService';
@@ -74,7 +76,10 @@
             description: lc('local_auto_sync_desc'),
             value: $store.autoSync
         },
-        ...topItems
+        ...topItems,
+        {
+            type: 'syncfolders'
+        }
     ]);
 </script>
 
@@ -82,6 +87,9 @@
     <gridlayout class="pageContent" rows="auto,*">
         <SyncSettingsCollectionView {items} row={1} bind:store bind:updateItem>
             <slot />
+            <Template key="syncfolders">
+                <SyncFoldersSettingsView {store} />
+            </Template>
         </SyncSettingsCollectionView>
 
         <CActionBar canGoBack modalWindow={true} title={lc('data_sync_settings')}>
