@@ -298,12 +298,6 @@ export default class SyncWorker extends BaseWorker {
         if (!service.syncFolders?.length) {
             return documents;
         }
-        DEV_LOG &&
-            console.log(
-                'filterDocumentsBySyncFolders',
-                service.syncFolders,
-                documents.map((item) => item.document.folders)
-            );
         const folderSet = new Set(service.syncFolders);
         // Documents not assigned to any folder are intentionally excluded when a folder filter is active.
         return documents.filter((item) => item.document.folders?.some((folderId) => folderSet.has(folderId)));
