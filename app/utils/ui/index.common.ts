@@ -1534,7 +1534,6 @@ export function copyTextToClipboard(text) {
     }
 }
 
-
 export async function showMatrixLevelPopover({ anchor, currentValue, item, onChange }) {
     if (!item.range) {
         return;

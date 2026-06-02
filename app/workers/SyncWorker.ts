@@ -298,6 +298,12 @@ export default class SyncWorker extends BaseWorker {
         if (!service.syncFolders?.length) {
             return documents;
         }
+        DEV_LOG &&
+            console.log(
+                'filterDocumentsBySyncFolders',
+                service.syncFolders,
+                documents.map((item) => item.document.folders)
+            );
         const folderSet = new Set(service.syncFolders);
         // Documents not assigned to any folder are intentionally excluded when a folder filter is active.
         return documents.filter((item) => item.document.folders?.some((folderId) => folderSet.has(folderId)));
@@ -867,7 +873,7 @@ export default class SyncWorker extends BaseWorker {
                   ? [{ document: event['doc'] as OCRDocument, pages: [event['doc']['pages'][event['pageIndex']]] as OCRPage[] }]
                   : undefined
         )?.filter((d) => !!d.document);
-        const localDocuments = eventDocuments ?? (await documentsService.documentRepository.search()).map((d) => ({ document: d, pages: d.pages }));
+        const localDocuments = eventDocuments ?? (await documentsService.documentRepository.findDocuments()).map((d) => ({ document: d, pages: d.pages }));
 
         // this should not happened but i got bug reports with null document. cant reproduce
         DEV_LOG &&
@@ -981,7 +987,7 @@ export default class SyncWorker extends BaseWorker {
         // in case of a full triggered sync we can filter non ocr paged to ocr as less as possible.
         // if the sync is triggered from page update or events like that we are forced to ocr
         const canFilterToOCR = force && eventDocuments === undefined;
-        const localDocuments = eventDocuments ?? (await documentsService.documentRepository.search()).map((d) => ({ document: d, pages: d.pages }));
+        const localDocuments = eventDocuments ?? (await documentsService.documentRepository.findDocuments()).map((d) => ({ document: d, pages: d.pages }));
 
         // this should not happened but i got bug reports with null document. cant reproduce
         DEV_LOG &&

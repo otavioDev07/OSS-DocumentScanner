@@ -61,17 +61,17 @@
     }
 </script>
 
-<ListItemAutoSize item={{ title: lc('sync_folders'), subtitle: lc('sync_folders_desc'), titleProps: { verticalAlignment: 'top' } }} paddingRight={0}>
+<ListItemAutoSize item={{ title: lc('sync_folders'), subtitle: lc('sync_folders_desc'), titleProps: { verticalAlignment: 'top' } }} paddingRight={0} rows="auto,auto">
     <mdbutton
         class="icon-btn"
         col={1}
         marginTop={6}
-        text="mdi-plus"
+        text="mdi-folder-plus-outline"
         variant="text"
-        verticalAlignment="top"
+        verticalAlignment="center"
         visibility={availableFolders.length > 0 ? 'visible' : 'hidden'}
         on:tap={addFolder} />
-    <wraplayout marginTop={50} verticalAlignment="bottom">
+    <wraplayout row={1}>
         {#each selectedFolders as folder (folder.id)}
             <Chip text={folder.name} on:tap={() => removeFolder(folder.id)} />
         {/each}
